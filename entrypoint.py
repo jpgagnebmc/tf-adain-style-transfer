@@ -1,7 +1,14 @@
-from models_integration_library.public_interface import start_loop
+from ai_integration.public_interface import start_loop
 
 from inference import initialize_model, infer
 
 initialize_model()
 
-start_loop(infer)
+start_loop(inference_function=infer, inputs_schema={
+    "style": {
+        "type": "image"
+    },
+    "content": {
+        "type": "image"
+    },
+})

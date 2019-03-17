@@ -1,3 +1,6 @@
+
+![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/deepaiorg/tf-adain-style-transfer.svg?style=plastic)
+![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/deepaiorg/tf-adain-style-transfer.svg)
 # Overview
 
 Implementation of Arbitrary Style Transfer in Real-time with Adaptive Instance Normalization in Tensorflow

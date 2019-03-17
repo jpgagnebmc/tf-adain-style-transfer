@@ -1,4 +1,3 @@
-import argparse
 import io
 import time
 import traceback
@@ -36,48 +35,6 @@ persistent_session = None
 data_format = 'channels_first'
 
 
-def parse_args():
-    parser = argparse.ArgumentParser(description='AdaIN Style Transfer')
-
-    parser.add_argument('--content', help='File path to the content image',
-                        default='/tf-adain/input/my_style.jpg')
-
-    parser.add_argument('--style', default='/tf-adain/input/my_content.jpg',
-                        help="""File path to the style image,
-            or multiple style images separated by commas if you want to do style
-            interpolation or spatial control""")
-
-    parser.add_argument('--content_size', default=512,
-                        type=int, help="""Maximum size for the content image, keeping
-            the original size if set to 0""")
-
-    parser.add_argument('--style_size', default=512, type=int,
-                        help="""Maximum size for the style image, keeping the original
-            size if set to 0""")
-
-    parser.add_argument('--crop', action='store_true', help="""If set, center
-            crop both content and style image before processing""")
-
-    parser.add_argument('--save_ext', default='jpg',
-                        help='The extension name of the output image')
-
-    parser.add_argument('--gpu', default=0, type=int,
-                        help='Zero-indexed ID of the GPU to use; for CPU mode set to -1')
-
-    parser.add_argument('--output_dir', default='/tf-adain/my_output/',
-                        help='Directory to save the output image(s)')
-
-    parser.add_argument('--preserve_color', action='store_true',
-                        help='If set, preserve color of the content image')
-
-    parser.add_argument('--alpha', default=1.0, type=float,
-                        help="""The weight that controls the degree of stylization. Should be
-            between 0 and 1""")
-
-    args = parser.parse_args()
-    return args
-
-
 def _build_graph(vgg_weights, decoder_weights, alpha, data_format):
     if data_format == 'channels_first':
         image = tf.placeholder(shape=(None, 3, None, None), dtype=tf.float32)
@@ -107,7 +64,6 @@ def _build_graph(vgg_weights, decoder_weights, alpha, data_format):
 
 
 def initialize_model():
-    global args
     global vgg
     global encoder
     global decoder
@@ -119,8 +75,6 @@ def initialize_model():
     global persistent_session
     global data_format
     alpha = 1.0
-
-    args = parse_args()
 
     graph = tf.Graph()
     # build the detection model graph from the saved model protobuf
@@ -164,10 +118,15 @@ def infer(inputs_dict):
         print('Starting inference')
         start = time.time()
 
-        content_image = load_image(io.BytesIO(inputs_dict['content']), args.content_size, args.crop)
-        style_image = load_image(io.BytesIO(inputs_dict['style']), args.style_size, args.crop)
+        content_size = 512
+        style_size = 512
+        crop = False
+        preserve_color = False
 
-        if args.preserve_color:
+        content_image = load_image(io.BytesIO(inputs_dict['content']), content_size, crop)
+        style_image = load_image(io.BytesIO(inputs_dict['style']), style_size, crop)
+
+        if preserve_color:
             style_image = coral(style_image, content_image)
         style_image = prepare_image(style_image)
         content_image = prepare_image(content_image)

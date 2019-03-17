@@ -82,4 +82,5 @@ RUN cd models && wget https://s3-us-west-2.amazonaws.com/deepai-opensource-codeb
 
 RUN pip3 install ai-integration
 
-CMD python3 entrypoint.py
+ENTRYPOINT ["python3", "entrypoint.py"]
+

@@ -20,7 +20,7 @@ Implementation of Arbitrary Style Transfer in Real-time with Adaptive Instance N
 # For details see [Fast Style Transfer](https://deepai.org/machine-learning-model/fast-style-transfer ) on [Deep AI](https://deepai.org)
 
 ## Paper
-https://arxiv.org/abs/1703.06868
+[Arbitrary Style Transfer in Real-time with Adaptive Instance Normalization](https://deepai.org/publication/arbitrary-style-transfer-in-real-time-with-adaptive-instance-normalization)
 
 Nvidia-Docker is required to run this image.
 

@@ -1,8 +1,10 @@
+<p>
+    <a href="https://cloud.docker.com/u/deepaiorg/repository/docker/deepaiorg/tf-adain-style-transfer">
+        <img src='https://img.shields.io/docker/cloud/automated/deepaiorg/tf-adain-style-transfer.svg?style=plastic' />
+        <img src='https://img.shields.io/docker/cloud/build/deepaiorg/tf-adain-style-transfer.svg' />
+    </a>
+</p>
 
-<a href="https://cloud.docker.com/u/deepaiorg/repository/docker/deepaiorg/tf-adain-style-transfer">
-<img src='https://img.shields.io/docker/cloud/automated/deepaiorg/tf-adain-style-transfer.svg?style=plastic' />
-<img src='https://img.shields.io/docker/cloud/build/deepaiorg/tf-adain-style-transfer.svg' />
-</a>
 This model has been integrated with [ai_integration](https://github.com/deepai-org/ai_integration/blob/master/README.md) for seamless portability across hosting providers.
 
 # Overview
